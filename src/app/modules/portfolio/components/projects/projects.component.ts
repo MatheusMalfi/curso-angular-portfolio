@@ -24,7 +24,7 @@ export class ProjectsComponent {
 
   public arrayProjects = signal<IProjects[]>([
     {
-      src: 'assets/img/projects/ClikSoftHouse.png',
+      src: 'assets/img/projects/ClikSoftHouse3.png',
       alt: 'Estágio Clik SotfHouse',
       title: 'Clik SotfHouse',
       with: '100px',
