@@ -1,70 +1,266 @@
 :host {
-    margin-top: 25px;
+  margin-top: 25px;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h2 {
+    text-align: center;
+    margin: 0 0 25px 0;
+  }
+
+  details {
+    overflow: hidden;
+    margin-top: 10px;
+    background: var(--black-010);
+    border-radius: 7px;
+    width: 100%; // Garante que preencha o container de forma responsiva
+
+    summary,
+    article {
+      padding: 10px 20px;
+      color: var(--grey);
+      transition: 500ms;
+    }
+
+    summary {
+      cursor: pointer;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: var(--secondary);
+
+      p {
+        font-size: 14px;
+        color: var(--white);
+
+        padding: 0;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* estilo da seta SVG */
+      .chevron {
+        width: 20px;
+        height: 20px;
+        color: var(--white); /* seta branca */
+        transition: transform 0.3s;
+      }
+    }
+
+    /* gira a seta quando o details está aberto */
+    &[open] summary .chevron {
+      transform: rotate(180deg);
+      border-radius: 7px 7px 0 0;
+    }
+  }
+
+  .screen-title {
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 5px;
+    font-size: 15px;
+    margin-top: 15px; // Dá um respiro entre o bloco anterior e o título da tela
+  }
+
+  .screen-text {
+    color: var(--grey);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  /* --- SEÇÃO REESTRUTURADA: BOTÃO DA GALERIA --- */
+  .container-btn-galeria {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0 10px 0;
+
+    .btn-galeria {
+      background: transparent;
+      border: 2px solid var(--secondary);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--secondary);
+        box-shadow: 0 0 15px var(--secondary);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* --- SEÇÃO INCRÍVEL: GRID DA GALERIA DE FOTOS --- */
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.5s cubic-bezier(0, 1, 0, 1),
+      opacity 0.4s ease,
+      margin 0.3s ease;
+    margin-top: 0;
+
+    &.ativa {
+      max-height: 1000px; // Altura limite que acomoda os cards expandindo suavemente
+      opacity: 1;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      transition:
+        max-height 0.7s ease-in-out,
+        opacity 0.5s ease,
+        margin 0.3s ease;
+    }
+  }
+
+  /* --- CARDS INDIVIDUAIS DE FOTO --- */
+  .card-foto {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--black-010);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 140px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .overlay-card {
+      position: absolute;
+      inset: 0;
+      background: rgba(
+        11,
+        44,
+        133,
+        0.85
+      ); // Mistura perfeita usando o tom do seu --secondary
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      span {
+        color: var(--white);
+        font-size: 13px;
+        font-weight: bold;
+        border: 1px solid var(--white);
+        padding: 6px 12px;
+        border-radius: 4px;
+        backdrop-filter: blur(2px);
+      }
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.08);
+      }
+      .overlay-card {
+        opacity: 1;
+      }
+      box-shadow: 0 6px 20px rgba(11, 44, 133, 0.35);
+    }
+  }
+
+  /* --- MODAL LIGHTBOX PREMIUM (TELA CHEIA) --- */
+  .modal-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(
+      16,
+      16,
+      26,
+      0.96
+    ); // Escurecimento profundo baseado nas suas cores escuras
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.25s ease-out forwards;
 
-    h2 {
-        text-align: center;
-        margin: 0 0 25px 0;
+    img {
+      max-width: 85%;
+      max-height: 82%;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    details {
-        overflow: hidden;
-        margin-top: 10px;
-        background: var(--black-010);
-        border-radius: 7px;
+    .btn-fechar {
+      position: absolute;
+      top: 25px;
+      right: 35px;
 
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-        summary, article{
-            padding: 10px 20px;
-            color: var(--grey);
-            transition: 500ms;
-        }
+      color: var(--white);
+      cursor: pointer;
+      user-select: none;
 
-        summary {
-            cursor: pointer;
+      transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+      svg {
+        width: 32px;
+        height: 32px;
+      }
 
-            background: var(--secondary);
-
-            p {
-                font-size: 14px;
-                color: var(--white);
-                
-                padding: 0;
-                margin: 0;
-
-                display: flex;
-                flex-direction: column;
-            }
-
-        }
-
-        &[open]{
-            summary{
-                &::after {
-                    content: url("../../../../../assets/icons/chevron-up.svg");
-                    margin-top: 5px;
-                }
-
-                border-radius: 7px 7px 0 0 ;
-            }
-        }
-
-
-        &:not([open]){
-            summary{
-                &::after {
-                    content: url("../../../../../assets/icons/chevron-down.svg");
-                    margin-top: 5px;
-                }
-            }
-        }
+      &:hover {
+        color: var(--red-010, #ff4d4d);
+        transform: scale(1.1);
+      }
     }
+  }
+
+  /* --- ANIMAÇÕES CSS --- */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.92);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }
