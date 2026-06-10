@@ -20,16 +20,12 @@ export class ExperiencesComponent {
         strong: 'Vendedor on-line',
         p: 'DG Soluções Estratégicas | Maio/2023 - Set/2023'
       },
-      text: 'Durante este período, operava com a prospecção de clientes e após isso realizava o contato através de ligações.'
     },
     {
       summary: {
         strong: 'Clik SoftHouse - Estagiário Front-End',
         p: 'Clik SoftHouse | 23/Out/2024 - 03/Jun/2026'
       },
-      text: `Atuei como estagiário na "Clik" implementando HTML, Typescript e Tailwind/CSS. 
-      <br> Fiquei responsável pelo front-end de um sistema de Correspondente Digital. 
-      <br> Meu maior desafio foi a implementação de uma home dividida em 3 (três) telas. `
     }
   ]);
 
