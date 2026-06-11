@@ -20,6 +20,12 @@ export class KnowledgeComponent {
       position: 'below'
     },
     {
+      src: 'assets/icons/knowledge/typescript.svg',
+      alt: 'Ícone de conhecimento de typescript',
+      tooltip: 'TypeScript',
+      position: 'below'
+    },
+    {
       src: 'assets/icons/knowledge/css3.svg',
       alt: 'Ícone de conhecimento de css3',
       tooltip: 'CSS3',
@@ -32,6 +38,12 @@ export class KnowledgeComponent {
       position: 'below'
     },
     {
+      src: 'assets/icons/knowledge/tailwind.svg',
+      alt: 'Ícone de conhecimento de tailwind css',
+      tooltip: 'Tailwind CSS',
+      position: 'below'
+    },
+    {
       src: 'assets/icons/knowledge/angular.svg',
       alt: 'Ícone de conhecimento de angular',
       tooltip: 'Angular',
@@ -41,6 +53,18 @@ export class KnowledgeComponent {
       src: 'assets/icons/knowledge/nodejs.svg',
       alt: 'Ícone de conhecimento de nodejs',
       tooltip: 'Node.js',
+      position: 'below'
+    },
+    {
+      src: 'assets/icons/knowledge/database.svg',
+      alt: 'Ícone de conhecimento de sql',
+      tooltip: 'MySql',
+      position: 'below'
+    },
+    {
+      src: 'assets/icons/knowledge/sass.svg',
+      alt: 'Ícone de conhecimento de sass',
+      tooltip: 'Sass',
       position: 'below'
     },
   ])
