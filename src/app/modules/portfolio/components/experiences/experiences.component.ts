@@ -11,9 +11,16 @@ import { IExperiences } from '../../interface/IExperiences.interface';
   styleUrls: ['./experiences.component.scss']
 })
 export class ExperiencesComponent {
+  // Controla se o grid da galeria está aberto
   public galleryOpen = signal<boolean>(false);
-  public imgModal = signal<string | null>(null);
 
+  // Controla quais imagens estão abertas no modal (array de strings)
+  public imgModal = signal<string[] | null>(null);
+
+  // Índice da imagem atualmente exibida no modal
+  public currentImageIndex = signal<number>(0);
+
+  // Array de experiências
   public arrayExperiences = signal<IExperiences[]>([
     {
       summary: {
@@ -29,15 +36,41 @@ export class ExperiencesComponent {
     }
   ]);
 
+  // Alterna a exibição do grid da galeria
   public toggleGaleria(): void {
     this.galleryOpen.update(value => !value);
   }
 
-  public abrirModal(url: string): void {
-    this.imgModal.set(url);
+  // Abre o modal com uma lista de imagens e zera o índice inicial
+  public openModal(images: string[]): void {
+    this.imgModal.set(images);
+    this.currentImageIndex.set(0);
   }
 
-  public fecharModal(): void {
+  // Fecha o modal e reseta o índice
+  public closeModal(): void {
     this.imgModal.set(null);
+    this.currentImageIndex.set(0);
+  }
+
+  // Vai para a próxima imagem no modal
+  public nextImage(): void {
+    const images = this.imgModal();
+    if (!images?.length) return;
+    this.currentImageIndex.update(i => (i + 1) % images.length);
+  }
+
+  // Volta para a imagem anterior no modal
+  public previousImage(): void {
+    const images = this.imgModal();
+    if (!images?.length) return;
+    this.currentImageIndex.update(i => (i - 1 + images.length) % images.length);
+  }
+
+  // Retorna a URL da imagem atual do modal
+  public getCurrentImage(): string {
+    const images = this.imgModal();
+    if (!images?.length) return '';
+    return images[this.currentImageIndex()];
   }
 }

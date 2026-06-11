@@ -13,55 +13,40 @@
         </summary>
         <article>
             <ng-container *ngIf="item.summary.strong === 'Clik SoftHouse - Estagiário Front-End'">
-                <div class="screen-text">Atuei como estagiário na "Clik" implementando HTML, Typescript e Tailwind/CSS.
+                <div class="screen-text">
+                    Atuei como estagiário na "Clik" implementando <strong>HTML, Typescript e Tailwind/CSS.</strong>
                     <br> Fiquei responsável pelo front-end de um sistema de Correspondente Digital.
                     <br> Meu maior desafio foi a implementação de uma home dividida em 3 (três) telas com controle de
                     acesso por nível, layout responsivo, adaptando-se a diferentes tamanhos de tela.
                     <br> Feedback visual caso não possua vídeos adicionados e tooltip.
                 </div>
-                <div class="screen-title">Tela 1: "Home"</div>
-                <div class="screen-text">
-                    Onde os vídeos, guias de acesso e contato de suporte ficam localizados, possui suporte para 8 vídeos
-                    com layout responsivo, evitando quebra.
-                </div>
-
-                <div class="screen-title">Tela 2: "Acesso a biblioteca de tutoriais"</div>
-                <div class="screen-text">
-                    Nesta tela o sistema conta com um filtro completo para categorias e níveis, tudo dividido por cards,
-                    onde cada card possui seus vídeos, títulos, descrições e categoria.
-                </div>
-
-                <div>
-                    <div class="screen-title">Tela 3: "Adicionar vídeos"</div>
-                    <div class="screen-text">
-                        Esta tela é destinada para a adição de novos vídeos, apenas os administradores conseguiam subir
-                        vídeos, através do "Loom" e importavam o vídeo dentro do sistema.
-                        <br> Suporte completo para anexar Thumbnail, GIF ou cor estática (azul, verde e etc).
-                        <br> Feedback visual através do "mat-error" para campos obrigatórios.
-                        <br> Filtro para troca dos 8 (oito) vídeos anexados na tela 1 "Home".
-                        <br> Pré-visualização do vídeo, onde o usuário enxerga como vai ficar salvo.
-                    </div>
-                </div>
 
                 <div class="container-btn-galeria">
                     <button class="btn-galeria" (click)="toggleGaleria()">
-                        {{ galeriaAberta() ? 'Ocultar Projetos' : 'Visualizar Telas Criadas' }}
+                        {{ galleryOpen() ? 'Ocultar Projetos' : 'Visualizar Telas Criadas' }}
                     </button>
                 </div>
 
-                <div class="galeria-grid" [class.ativa]="galeriaAberta()">
-                    <div class="card-foto" (click)="abrirModal('assets/portfolio/tela1-home.png')">
-                        <img src="assets/portfolio/tela1-home.png" alt="Tela Home">
+                <div class="galeria-grid" [class.ativa]="galleryOpen()">
+                    <div class="card-foto" (click)="openModal(['assets/img/home.png'])">
+                        <img src="assets/img/home-thumbnail.png" alt="Tela Home">
                         <div class="overlay-card"><span>Expandir Tela 1</span></div>
                     </div>
 
-                    <div class="card-foto" (click)="abrirModal('assets/portfolio/tela2-tutoriais.png')">
-                        <img src="assets/portfolio/tela2-tutoriais.png" alt="Tela Biblioteca de Tutoriais">
+                    <div class="card-foto" (click)="openModal([
+                'assets/img/biblioteca-tutoriais-todas.png',
+                'assets/img/biblioteca-tutoriais-sms.png',
+                'assets/img/biblioteca-tutoriais-novideos.png'
+              ])">
+                        <img src="assets/img/biblioteca-tutoriais-thumbnail.png" alt="Tela Biblioteca de Tutoriais">
                         <div class="overlay-card"><span>Expandir Tela 2</span></div>
                     </div>
 
-                    <div class="card-foto" (click)="abrirModal('assets/portfolio/tela3-adicionar.png')">
-                        <img src="assets/portfolio/tela3-adicionar.png" alt="Tela Adicionar Vídeos">
+                    <div class="card-foto" (click)="openModal([
+                        'assets/img/add-novo-tutorial-cor-solida.png',
+                        'assets/img/add-novo-tutorial-thumbnail.png'
+                        ])">
+                        <img src="assets/img/add-videos-thumbnail.png" alt="Tela Adicionar Vídeos">
                         <div class="overlay-card"><span>Expandir Tela 3</span></div>
                     </div>
                 </div>
@@ -77,12 +62,24 @@
     </details>
 </div>
 
-<div *ngIf="imagemModal()" class="modal-lightbox" (click)="fecharModal()">
-    <span class="btn-fechar">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+<div *ngIf="imgModal()" class="modal-lightbox" (click)="closeModal()">
+    <span class="btn-fechar" (click)="closeModal(); $event.stopPropagation()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
             <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2" />
             <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="2" />
         </svg>
     </span>
-    <img [src]="imagemModal()" alt="Print do sistema expandido" (click)="$event.stopPropagation()">
+
+    <button *ngIf="imgModal()!.length > 1" class="nav-btn prev" (click)="previousImage(); $event.stopPropagation()">
+        < </button>
+
+            <img [src]="getCurrentImage()" alt="Print do sistema expandido" (click)="$event.stopPropagation()">
+
+            <button *ngIf="imgModal()!.length > 1" class="nav-btn next" (click)="nextImage(); $event.stopPropagation()">
+                >
+            </button>
+
+            <div *ngIf="imgModal()!.length > 1" class="contador">
+                {{ currentImageIndex() + 1 }} / {{ imgModal()!.length }}
+            </div>
 </div>

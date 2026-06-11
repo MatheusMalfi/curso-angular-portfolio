@@ -110,7 +110,7 @@
   /* --- SEÇÃO INCRÍVEL: GRID DA GALERIA DE FOTOS --- */
   .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     max-height: 0;
     opacity: 0;
@@ -131,6 +131,17 @@
         opacity 0.5s ease,
         margin 0.3s ease;
     }
+  }
+
+  .card-foto:last-child {
+    grid-column: 1 / -1;
+  }
+  .card-foto:nth-child(3) {
+    grid-column: span 2;
+  }
+  .card-foto:nth-child(3) {
+    grid-column: span 2;
+    height: 180px;
   }
 
   /* --- CARDS INDIVIDUAIS DE FOTO --- */
@@ -206,8 +217,8 @@
     animation: fadeIn 0.25s ease-out forwards;
 
     img {
-      max-width: 85%;
-      max-height: 82%;
+      max-width: 90%;
+      max-height: 85vh;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
@@ -240,6 +251,59 @@
         color: var(--red-010, #ff4d4d);
         transform: scale(1.1);
       }
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 60px;
+      height: 60px;
+
+      border: none;
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+
+      color: white;
+      font-size: 36px;
+
+      transition: all 0.25s ease;
+
+      &:hover {
+        transform: translateY(-50%) scale(1.1);
+        background: var(--secondary);
+        box-shadow: 0 0 20px rgba(11, 44, 133, 0.7);
+      }
+    }
+
+    .prev {
+      left: 30px;
+    }
+
+    .next {
+      right: 30px;
+    }
+
+    .contador {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+
+      background: rgba(20, 20, 35, 0.85);
+
+      padding: 6px 14px;
+      border-radius: 999px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
   }
 
