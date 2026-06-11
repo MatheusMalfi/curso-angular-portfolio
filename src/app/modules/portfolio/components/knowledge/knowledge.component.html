@@ -3,8 +3,9 @@
     <ul>
         @for(item of arrayKnowledge(); track item){
         <li>
-            <img [src]="item.src" [alt]="item.alt" loading="lazy" width="22px" height="24px"/>
+            <img [src]="item.src" [alt]="item.alt" loading="lazy" width="22px" height="24px" [matTooltip]="item.tooltip"
+                [matTooltipPosition]="item.position" />
         </li>
-    }
+        }
     </ul>
 </div>
