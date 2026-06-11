@@ -11,8 +11,8 @@ import { IExperiences } from '../../interface/IExperiences.interface';
   styleUrls: ['./experiences.component.scss']
 })
 export class ExperiencesComponent {
-  public galeriaAberta = signal<boolean>(false);
-  public imagemModal = signal<string | null>(null);
+  public galleryOpen = signal<boolean>(false);
+  public imgModal = signal<string | null>(null);
 
   public arrayExperiences = signal<IExperiences[]>([
     {
@@ -30,14 +30,14 @@ export class ExperiencesComponent {
   ]);
 
   public toggleGaleria(): void {
-    this.galeriaAberta.update(value => !value);
+    this.galleryOpen.update(value => !value);
   }
 
   public abrirModal(url: string): void {
-    this.imagemModal.set(url);
+    this.imgModal.set(url);
   }
 
   public fecharModal(): void {
-    this.imagemModal.set(null);
+    this.imgModal.set(null);
   }
 }
