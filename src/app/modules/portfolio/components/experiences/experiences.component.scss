@@ -22,7 +22,6 @@
     article {
       padding: 10px 20px;
       color: var(--grey);
-      transition: 500ms;
     }
 
     summary {
@@ -33,23 +32,26 @@
       align-items: center;
 
       background: var(--secondary);
+      color: var(--white);
 
       p {
         font-size: 14px;
-        color: var(--white);
 
         padding: 0;
         margin: 0;
 
         display: flex;
         flex-direction: column;
+
+        strong {
+          color: var(--white);
+        }
       }
 
       /* estilo da seta SVG */
       .chevron {
         width: 20px;
         height: 20px;
-        color: var(--white); /* seta branca */
         transition: transform 0.3s;
       }
     }
@@ -61,16 +63,7 @@
     }
   }
 
-  .screen-title {
-    font-weight: bold;
-    color: var(--white);
-    margin-bottom: 5px;
-    font-size: 15px;
-    margin-top: 15px; // Dá um respiro entre o bloco anterior e o título da tela
-  }
-
   .screen-text {
-    color: var(--grey);
     line-height: 1.5;
     margin-bottom: 10px;
     font-size: 14px;
@@ -80,7 +73,6 @@
   .container-btn-galeria {
     display: flex;
     justify-content: center;
-    width: 100%;
     margin: 20px 0 10px 0;
 
     .btn-galeria {
@@ -119,7 +111,6 @@
       max-height 0.5s cubic-bezier(0, 1, 0, 1),
       opacity 0.4s ease,
       margin 0.3s ease;
-    margin-top: 0;
 
     &.ativa {
       max-height: 1000px; // Altura limite que acomoda os cards expandindo suavemente
@@ -135,9 +126,6 @@
 
   .card-foto:last-child {
     grid-column: 1 / -1;
-  }
-  .card-foto:nth-child(3) {
-    grid-column: span 2;
   }
   .card-foto:nth-child(3) {
     grid-column: span 2;
@@ -213,11 +201,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--white);
     backdrop-filter: blur(4px);
     animation: fadeIn 0.25s ease-out forwards;
 
     .modal-content {
-      width: fit-content;
       max-width: calc(100vw - 48px);
       max-height: calc(100vh - 32px);
       display: flex;
@@ -228,7 +216,6 @@
     }
 
     img {
-      width: auto;
       max-width: min(1400px, calc(100vw - 64px));
       max-height: calc(100vh - 140px);
       border-radius: 8px;
@@ -240,7 +227,6 @@
     .modal-caption {
       width: 100%;
       box-sizing: border-box;
-      color: var(--white);
       white-space: pre-line;
       line-height: 1.6;
       font-size: 15px;
@@ -260,7 +246,6 @@
       align-items: center;
       justify-content: center;
 
-      color: var(--white);
       cursor: pointer;
       user-select: none;
 
@@ -294,7 +279,6 @@
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
 
-      color: white;
       font-size: 36px;
 
       transition: all 0.25s ease;
@@ -320,7 +304,6 @@
       left: 50%;
       transform: translateX(-50%);
 
-      color: white;
       font-size: 14px;
       font-weight: bold;
 
@@ -341,11 +324,6 @@
       img {
         max-width: 100%;
         max-height: 70vh;
-      }
-
-      .modal-caption {
-        flex-basis: auto;
-        width: 100%;
       }
     }
   }

@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // interface
 import { IExperienceModalImage, IExperiences } from '../../interface/IExperiences.interface';
+import { LanguageService } from '../../../../shared/services/language.service';
 
 @Component({
   selector: 'app-experiences',
@@ -11,6 +12,8 @@ import { IExperienceModalImage, IExperiences } from '../../interface/IExperience
   styleUrls: ['./experiences.component.scss']
 })
 export class ExperiencesComponent {
+  public readonly i18n = inject(LanguageService);
+
   // Controla se o grid da galeria está aberto
   public galleryOpen = signal<boolean>(false);
 
@@ -21,24 +24,32 @@ export class ExperiencesComponent {
   public currentImageIndex = signal<number>(0);
 
   // Array de experiências
-  public arrayExperiences = signal<IExperiences[]>([
-    {
-      summary: {
-        strong: 'Vendedor on-line',
-        p: 'DG Soluções Estratégicas | Maio/2023 - Set/2023'
+  public readonly arrayExperiences = computed<IExperiences[]>(() => {
+    const text = this.i18n.text().experiences.items;
+
+    return [
+      {
+        id: 'sales',
+        summary: {
+          strong: text.sales.title,
+          p: text.sales.period
+        },
+        text: text.sales.text
       },
-      text: 'Durante este período, operava com a prospecção de clientes e após isso realizava o contato através de ligações.'
-    },
-    {
-      summary: {
-        strong: 'Clik SoftHouse - Estagiário Front-End',
-        p: 'Clik SoftHouse | 23/Out/2024 - 03/Jun/2026'
-      },
-      text: `Atuei como estagiário na "Clik" implementando HTML, Typescript e Tailwind/CSS. 
-      <br> Fiquei responsável pelo front-end de um sistema de Correspondente Digital. 
-      <br> Meu maior desafio foi a implementação de uma home dividida em 3 (três) telas. `
-    }
-  ]);
+      {
+        id: 'clik',
+        summary: {
+          strong: text.clik.title,
+          p: text.clik.period
+        },
+        text: text.clik.overview
+      }
+    ];
+  });
+
+  public isClikExperience(item: IExperiences): boolean {
+    return item.id === 'clik';
+  }
 
   // Alterna a exibição do grid da galeria
   public toggleGaleria(): void {

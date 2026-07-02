@@ -1,19 +1,14 @@
 <div class="container">
-    <h2>Área</h2>
+    <h2>{{ i18n.text().projects.title }}</h2>
 
     <ul>
         @for(item of arrayProjects(); track item){
         <li>
             <button (click)="openDialog(item)">
-                <img 
-                [src]="item.src"
-                [alt]="item.alt"
-                [attr.width]="item.with"
-                [attr.height]="item.height"
-                loading="lazy"
-                />
+                <img [src]="item.src" [alt]="item.alt" [attr.width]="item.with" [attr.height]="item.height"
+                    loading="lazy" />
             </button>
         </li>
-    }
+        }
     </ul>
 </div>

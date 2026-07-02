@@ -4,6 +4,7 @@ export interface IExperienceModalImage {
 }
 
 export interface IExperiences {
+  id: 'sales' | 'clik';
   summary: { strong: string, p: string };
   text: string;
 }

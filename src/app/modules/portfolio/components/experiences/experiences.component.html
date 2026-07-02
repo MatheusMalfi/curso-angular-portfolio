@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Experiências</h2>
+    <h2>{{ i18n.text().experiences.title }}</h2>
 
     <details *ngFor="let item of arrayExperiences()" class="experience">
         <summary>
@@ -12,68 +12,69 @@
             </svg>
         </summary>
         <article>
-            <ng-container *ngIf="item.summary.strong === 'Clik SoftHouse - Estagiário Front-End'">
+            <ng-container *ngIf="isClikExperience(item)">
                 <div class="screen-text">
-                    Atuei como estagiário na "Clik" implementando <strong>HTML, Typescript e Tailwind/CSS.</strong>
-                    <br> Fiquei responsável pelo front-end de um sistema de Correspondente Digital.
-                    <br> Meu maior desafio foi a implementação de uma home dividida em 3 (três) telas com controle de
-                    acesso por nível, layout responsivo, adaptando-se a diferentes tamanhos de tela.
-                    <br> Feedback visual caso não possua vídeos adicionados e tooltip.
+                    {{ i18n.text().experiences.items.clik.overview }}
+                    <br> {{ i18n.text().experiences.items.clik.bullets[0] }}
+                    <br> {{ i18n.text().experiences.items.clik.bullets[1] }}
+                    <br> {{ i18n.text().experiences.items.clik.bullets[2] }}
                 </div>
 
                 <div class="container-btn-galeria">
                     <button class="btn-galeria" (click)="toggleGaleria()">
-                        {{ galleryOpen() ? 'Ocultar Projetos' : 'Visualizar Projetos Criados' }}
+                        {{ galleryOpen() ? i18n.text().experiences.galleryHide : i18n.text().experiences.galleryShow }}
                     </button>
                 </div>
 
                 <div class="galeria-grid" [class.ativa]="galleryOpen()">
                     <div class="card-foto" (click)="openModal([{ 
                         src: 'assets/img/home.png',
-                        caption: 'Onde os vídeos, guias de acesso e contato de suporte ficam localizados, possui suporte para 8 vídeos com layout responsivo, quebra.'
+                        caption: i18n.text().experiences.items.clik.gallery.homeCaption
                     }])">
-                        <img src="assets/img/home-thumbnail.png" alt="Tela Home">
-                        <div class="overlay-card"><span>Expandir Tela 1</span></div>
+                        <img src="assets/img/home-thumbnail.png"
+                            [alt]="i18n.text().experiences.items.clik.images.homeAlt">
+                        <div class="overlay-card"><span>{{ i18n.text().experiences.galleryCards.first }}</span></div>
                     </div>
 
                     <div class="card-foto" (click)="openModal([
                 {
                     src: 'assets/img/biblioteca-tutoriais-todas.png',
-                    caption: 'Nesta tela o sistema conta com um filtro completo para categorias e níveis, tudo dividido por cards, onde cada card possui seus vídeos, títulos, descrições e categoria.'
+                    caption: i18n.text().experiences.items.clik.gallery.libraryCaption
                 },
                 {
                     src: 'assets/img/biblioteca-tutoriais-sms.png',
-                    caption: 'Nesta tela o sistema conta com um filtro completo para categorias e níveis, tudo dividido por cards, onde cada card possui seus vídeos, títulos, descrições e categoria.'
+                    caption: i18n.text().experiences.items.clik.gallery.libraryCaption
                 },
                 {
                     src: 'assets/img/biblioteca-tutoriais-novideos.png',
-                    caption: 'Nesta tela o sistema conta com um filtro completo para categorias e níveis, tudo dividido por cards, onde cada card possui seus vídeos, títulos, descrições e categoria.'
+                    caption: i18n.text().experiences.items.clik.gallery.libraryCaption
                 }
               ])">
-                        <img src="assets/img/biblioteca-tutoriais-thumbnail.png" alt="Tela Biblioteca de Tutoriais">
-                        <div class="overlay-card"><span>Expandir Tela 2</span></div>
+                        <img src="assets/img/biblioteca-tutoriais-thumbnail.png"
+                            [alt]="i18n.text().experiences.items.clik.images.libraryAlt">
+                        <div class="overlay-card"><span>{{ i18n.text().experiences.galleryCards.second }}</span></div>
                     </div>
 
                     <div class="card-foto" (click)="openModal([
                         {
                             src: 'assets/img/add-novo-tutorial-cor-solida.png',
-                            caption: 'Esta tela é destinada para a adição de novos vídeos, apenas os administradores conseguiam subir vídeos, através do Loom e importavam o vídeo dentro do sistema.\nSuporte completo para anexar Thumbnail, GIF ou cor estática.'
+                            caption: i18n.text().experiences.items.clik.gallery.addVideoPrimaryCaption
                         },
                         {
                             src: 'assets/img/add-novo-tutorial-thumbnail.png',
-                            caption: 'Feedback visual através do mat-error para campos obrigatórios.\nFiltro para troca dos 8 vídeos anexados na tela 1 Home.\nPré-visualização do vídeo, onde o usuário enxerga como vai ficar salvo.'
+                            caption: i18n.text().experiences.items.clik.gallery.addVideoSecondaryCaption
                         },
                         ])">
-                        <img src="assets/img/add-videos-thumbnail.png" alt="Tela Adicionar Vídeos">
-                        <div class="overlay-card"><span>Expandir Tela 3</span></div>
+                        <img src="assets/img/add-videos-thumbnail.png"
+                            [alt]="i18n.text().experiences.items.clik.images.addVideoAlt">
+                        <div class="overlay-card"><span>{{ i18n.text().experiences.galleryCards.third }}</span></div>
                     </div>
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="item.summary.strong === 'Vendedor on-line'">
+            <ng-container *ngIf="item.id === 'sales'">
                 <div class="screen-text">
-                    Durante este período, operava com a prospecção de clientes e após isso realizava o contato através
-                    de ligações, explicando nosso serviço e agendando reuniões.
+                    {{ item.text }}
                 </div>
             </ng-container>
         </article>
@@ -92,7 +93,7 @@
         < </button>
 
             <div class="modal-content" (click)="$event.stopPropagation()">
-                <img [src]="getCurrentImage()" alt="Print do sistema expandido">
+                <img [src]="getCurrentImage()" [alt]="i18n.text().experiences.expandedSystemAlt">
 
                 <div *ngIf="getCurrentCaption()" class="modal-caption">
                     {{ getCurrentCaption() }}
