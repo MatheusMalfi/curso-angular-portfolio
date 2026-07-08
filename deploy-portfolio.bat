@@ -1,10 +1,23 @@
 @echo off
 setlocal
 
-set "APP_DIR=D:\OneDrive\Área de Trabalho\Curso Angular Portfólio\curso-angular-portfolio"
-set "PAGES_DIR=D:\OneDrive\Área de Trabalho\MatheusMalfi.github.io"
+for %%I in ("%~dp0.") do set "APP_DIR=%%~fI"
+for %%I in ("%APP_DIR%..\..\..") do set "DESKTOP_DIR=%%~fI\"
+set "PAGES_DIR=%DESKTOP_DIR%MatheusMalfi.github.io"
 set "BUILD_DIR=%APP_DIR%\dist\curso-angular-portfolio\browser"
 set "DEFAULT_COMMIT_MESSAGE=Atualiza portfolio publicado"
+
+if not exist "%APP_DIR%" (
+  echo Pasta do projeto nao encontrada:
+  echo %APP_DIR%
+  goto :error
+)
+
+if not exist "%PAGES_DIR%" (
+  echo Pasta do repositorio publicado nao encontrada:
+  echo %PAGES_DIR%
+  goto :error
+)
 
 set /p "COMMIT_MESSAGE=Mensagem do commit [%DEFAULT_COMMIT_MESSAGE%]: "
 if "%COMMIT_MESSAGE%"=="" set "COMMIT_MESSAGE=%DEFAULT_COMMIT_MESSAGE%"
@@ -12,15 +25,22 @@ if "%COMMIT_MESSAGE%"=="" set "COMMIT_MESSAGE=%DEFAULT_COMMIT_MESSAGE%"
 echo ===============================
 echo Build do portfolio
 echo ===============================
-cd /d "%APP_DIR%" || goto :error
+pushd "%APP_DIR%" || goto :error
 call npx ng build --base-href /
 if errorlevel 1 goto :error
+popd
+
+if not exist "%BUILD_DIR%" (
+  echo Pasta de build nao encontrada:
+  echo %BUILD_DIR%
+  goto :error
+)
 
 echo.
 echo ===============================
 echo Limpando repositorio publicado
 echo ===============================
-cd /d "%PAGES_DIR%" || goto :error
+pushd "%PAGES_DIR%" || goto :error
 
 for /f "delims=" %%i in ('dir /b /a') do (
   if /i not "%%i"==".git" (
@@ -52,6 +72,7 @@ if errorlevel 1 goto :error
 
 git push
 if errorlevel 1 goto :error
+popd
 
 echo.
 echo ===============================
@@ -67,6 +88,7 @@ echo ===============================
 echo Nenhuma alteracao encontrada para publicar.
 echo Link atual: https://matheusmalfi.github.io/
 echo ===============================
+popd
 start "" "https://matheusmalfi.github.io/"
 goto :eof
 
