@@ -75,6 +75,12 @@ interface TranslationDictionary {
         description: string;
         companyLink: string;
       };
+      stockControl: {
+        alt: string;
+        title: string;
+        description: string;
+        repositoryLink: string;
+      };
     };
   };
 }
@@ -147,7 +153,7 @@ const translations: Record<AppLanguage, TranslationDictionary> = {
       }
     },
     projects: {
-      title: 'Área',
+      title: 'Meus projetos',
       dialogDescription: 'Descrição',
       closeDialogAlt: 'Botão para fechar o dialog',
       items: {
@@ -156,6 +162,12 @@ const translations: Record<AppLanguage, TranslationDictionary> = {
           title: 'Clik SoftHouse',
           description: 'Estagiando pela empresa no Front-end.',
           companyLink: 'Conheça a empresa'
+        },
+        stockControl: {
+          alt: 'Projeto StockControl hospedado no GitHub',
+          title: 'StockControl',
+          description: 'Sistema de controle de estoque desenvolvido para a Universidade Municipal de São Caetano do Sul (USCS), com foco em cadastro de itens, movimentações, solicitações de coleta e organização operacional.',
+          repositoryLink: 'Ver repositório no GitHub'
         }
       }
     }
@@ -225,7 +237,7 @@ const translations: Record<AppLanguage, TranslationDictionary> = {
       }
     },
     projects: {
-      title: 'Projects',
+      title: 'My Projects',
       dialogDescription: 'Description',
       closeDialogAlt: 'Button to close the dialog',
       items: {
@@ -234,6 +246,12 @@ const translations: Record<AppLanguage, TranslationDictionary> = {
           title: 'Clik SoftHouse',
           description: 'Internship role in the company Front-end team.',
           companyLink: 'Visit the company'
+        },
+        stockControl: {
+          alt: 'StockControl project hosted on GitHub',
+          title: 'StockControl',
+          description: 'Inventory control system developed for the Municipal University of Sao Caetano do Sul (USCS), focused on item registration, stock movements, collection requests, and operational organization.',
+          repositoryLink: 'View repository on GitHub'
         }
       }
     }

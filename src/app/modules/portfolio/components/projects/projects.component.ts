@@ -25,21 +25,36 @@ export class ProjectsComponent {
   public readonly i18n = inject(LanguageService);
 
   public readonly arrayProjects = computed<IProjects[]>(() => {
-    const text = this.i18n.text().projects.items.clik;
+    const text = this.i18n.text().projects.items;
 
     return [
       {
         id: 'clik',
         src: 'assets/img/projects/ClikSoftHouse3.png',
-        alt: text.alt,
-        title: text.title,
+        alt: text.clik.alt,
+        title: text.clik.title,
         with: '100px',
         height: '51px',
-        description: text.description,
+        description: text.clik.description,
         links: [
           {
-            name: text.companyLink,
+            name: text.clik.companyLink,
             href: 'https://cliksofthouse.com.br',
+          },
+        ],
+      },
+      {
+        id: 'stock-control',
+        src: 'https://opengraph.githubassets.com/1/MatheusMalfi/StockControl',
+        alt: text.stockControl.alt,
+        title: text.stockControl.title,
+        with: '100px',
+        height: '51px',
+        description: text.stockControl.description,
+        links: [
+          {
+            name: text.stockControl.repositoryLink,
+            href: 'https://github.com/MatheusMalfi/StockControl',
           },
         ],
       },
