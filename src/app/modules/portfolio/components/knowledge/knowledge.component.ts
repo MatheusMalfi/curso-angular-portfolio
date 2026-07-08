@@ -73,6 +73,12 @@ export class KnowledgeComponent {
         tooltip: 'Sass',
         position: 'below'
       },
+      {
+        src: 'assets/icons/knowledge/kanban.svg',
+        alt: `${prefix} Kanban`,
+        tooltip: 'Kanban',
+        position: 'below'
+      },
     ];
   });
 }
